@@ -1,0 +1,91 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<Mufredat>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include DataTables CSS and JS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<!-- Include DataTables Row Grouping plugin -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.js"></script>
+
+<h2>Öğrenci Bölüm Müfredatı</h2>
+<h5>Akademik Yıl Filtreleme</h5>
+
+<form method="get" action="@Url.Action("IndexOgrenci", "Mufredat")">
+    <label for="academicYear">Akademik Yıl:</label>
+    <select id="academicYear" name="academicYear">
+        <option value="">Tümü</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+    </select>
+    <button type="submit">Filtrele</button>
+</form>
+
+<table class="table table-bordered" id="groupedDataTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ders Kodu</th>
+            <th>Ders Adı</th>
+            <th>Ders Türü</th>
+            <th>Akademik Yıl</th>
+            <th>Teorik(T)</th>
+            <th>Uygulama(U)</th>
+            <th>Kredi(K)</th>
+            <th>ECTS</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        //if (Int32.Parse(item.Bolum.Ogrenci.) == Convert.ToInt32(Session["OgrenciNo"]))
+        {
+            {
+                if (string.IsNullOrEmpty(Request.QueryString["academicYear"]) || item.AkademikYil == Request.QueryString["academicYear"])
+                {
+                <tr>
+                    <td>@item.MufredatID</td>
+                    <td>@item.DersHavuzu.DersKodu</td>
+                    <td>@item.DersHavuzu.DersAdi</td>
+                    <td>@item.DersHavuzu.DersTuru</td>
+                    <td>@item.AkademikYil</td>
+                    <td>@item.DersHavuzu.Teorik</td>
+                    <td>@item.DersHavuzu.Uygulama</td>
+                    <td>@item.DersHavuzu.Kredi</td>
+                    <td>@item.DersHavuzu.ECTS</td>
+                </tr>
+                    }
+                }
+            }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#groupedDataTable').DataTable({
+            // Enable row grouping based on the second column (Akademik Dönem)
+            rowGroup: {
+                dataSrc: 5, // Akademik Dönem'e göre grupla
+                startRender: function (rows, group) {
+                    // Customize the rendering of the group header
+                    return 'Ders Dönem: ' + group;
+                }
+            },
+            columnDefs: [
+                {
+                    targets: [5], // Akademik Dönem sütun
+                    visible: false // Akademik Dönem sütununu gizle
+                }
+            ]
+        });
+    });
+</script>
+

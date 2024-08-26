@@ -1,0 +1,349 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<Ogrenci>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Bilgi Sistemi</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- DataTables CSS ve JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Clipboard.js kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+    <!-- SheetJS kütüphanesi -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+    <!-- jsPDF kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="path-to-your-scripts-folder/FileSaver.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- DataTables CSS ve JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <!-- jsPDF kütüphanesi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h1>Öğrenci Listesi</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+
+            </div>
+
+            <a href="@Url.Action("OgrenciEkle", "AnaSayfa")" class="btn btn-primary">Öğrenci Ekle</a>
+
+        </div>
+        <button id="copyButton" >Kopyala</button>
+        <button id="exportExcelButton">Excel''e Aktar</button>
+        <button id="convertButton">PDF'e Akatar</button>
+
+        @*<a asp-action="GeneratePDF" asp-controller="AnaSayfaa">PDF'e Aktar'</a>*@
+        @*@Html.ActionLink("PDF'e Aktar", "GeneratePDF", new { @class = "btn btn-danger"})*@
+
+
+        <br />
+
+        <table class="table table-bordered" id="myTable">
+            <thead>
+                <tr>
+                    @if (User.IsInRole("Öğretim Elemanı"))
+                    {
+                        <th>#</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Ogrenci No</th>
+                        <th>Durumu</th>
+                        <th>Bolum Adı</th>
+                        <th>İşlem</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (User.IsInRole("Öğretim Elemanı"))
+                        {
+                            <td>@item.OgrenciID</td>
+                            <td>@item.Adi</td>
+                            <td>@item.Soyadi</td>
+                            <td>@item.OgrenciNo</td>
+                            <td>@item.Durumu</td>
+                            <td>@item.Bolum.BolumAdi</td>
+                            <td>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#detayModal-@item.OgrenciID">Görüntüle</button>
+                                <div class="modal fade" id="detayModal-@item.OgrenciID" tabindex="-1" role="dialog" aria-labelledby="detayModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="detayModalLabel">Ders Detayları - @item.Adi @item.Soyadi</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="container">
+                                                <div class="container">
+                                                    <div class="col-md-12">
+                                                        <br />
+                                                        <br />
+
+                                                        <label><b>Öğrenci Adı:</b> @item.Adi</label><br />
+                                                        <label><b>Öğrenci Soyadı:</b> @item.Soyadi</label><br />
+                                                        <label><b>Öğrenci Numarası:</b> @item.OgrenciNo</label><br />
+                                                        <label><b>Öğrenci Durumu:</b> @item.Durumu</label><br />
+                                                        <label><b>Kayıt Tarihi:</b> @item.KayitTarihi</label><br />
+                                                        <label><b>Ayrılma Tarihi:</b> @item.AyrilmaTarihi</label><br />
+                                                        <label><b>TC Kimlik No:</b> @item.TCKimlikNo</label><br />
+                                                        <label><b>Cinsiyet:</b> @item.Cinsiyet</label><br />
+                                                        <label><b>Doğum Tarihi:</b> @item.DogumTarihi</label><br />
+                                                        <br />
+                                                        <br />
+
+
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="container">
+                                                    <div class="container">
+                                                        <div class="col-md-12">
+                                                            @using (Html.BeginForm("IndexOgretimElemani", "AnaSayfa", FormMethod.Post))
+                                                            {
+                                                                <button type="submit" class="btn btn-primary">Kapat</button><br />
+                                                            }
+
+
+                                                        </div>
+                                                        <br />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#duzenleModal-@item.OgrenciID">Düzenle</button>
+                                <div class="modal fade" id="duzenleModal-@item.OgrenciID" tabindex="-1" role="dialog" aria-labelledby="duzenleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="duzenleModal">Düzenle Öğrenci Bilgileri - @item.Adi @item.Soyadi</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="container">
+                                                <div class="container">
+                                                    @using (Html.BeginForm("DuzenleOgretimElemani", "AnaSayfa", FormMethod.Post))
+                                                    {
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="Ad">Adı :</label>
+                                                                        <input type="text" id="Adi" name="Adi" class="form-control" value="@item.Adi" />
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="Soyadi">Soyadı :</label>
+                                                                        <input type="text" id="Soyadi" name="Soyadi" class="form-control" value="@item.Soyadi " />
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="OgrenciNo">Öğrenci No :</label>
+                                                                        <input type="text" id="OgrenciNo" name="OgrenciNo" class="form-control" value="@item.OgrenciNo " />
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="Durumu">Durumu :</label>
+                                                                        <input type="text" id="Durumu" name="Durumu" class="form-control" value="@item.Durumu " />
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="BolumAdi">Bölüm Adı :</label>
+                                                                        <input type="text" id="BolumAdi" name="BolumAdi" class="form-control" value="@item.Bolum.BolumAdi " />
+                                                                    </div>
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-md-2">
+
+                                                                                <button type="submit" class="btn btn-success">Güncelle</button>
+
+
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>}
+                                                </div>
+                                                <div class="container">
+                                                    <div class="container">
+                                                        <div class="col-md-12">
+                                                            @using (Html.BeginForm("IndexOgretimElemani", "AnaSayfa", FormMethod.Post))
+                                                            {
+                                                                <button type="submit" class="btn btn-primary">Kapat</button><br />
+                                                            }
+
+
+                                                        </div>
+                                                        <br />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @Html.ActionLink("Sil", "SilOgretimElemani", new { id = item.OgrenciID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek istiyor musunuz?')" })
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                // DataTables initialization
+                var dataTable = $('#myTable').DataTable({
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tümü"]],
+                    "pageLength": 10,
+                });
+
+
+
+                // Copy button
+                var copy = new ClipboardJS('#copyButton', {
+                    target: function (trigger) {
+                        return document.querySelector('.table');
+                    }
+                });
+
+
+                // Copy button success message
+                copy.on('success', function (e) {
+                    alert('Tablo kopyalandı!');
+                });
+
+
+            });
+
+
+            // PDF KISMINA AİTTİR
+           
+            document.getElementById('convertButton').addEventListener('click', function () {
+                // Tabloyu içeren elementin ID'si ile tabloyu seç
+                var myTable = document.getElementById('myTable');
+                var secTable = myTable.cloneNode(true);
+                // Belirli bir sütunu (kolonu) silen fonksiyon
+                function deleteColumn(columnIndex) {
+                    for (var i = 0; i < secTable.rows.length; i++) {
+                        secTable.rows[i].deleteCell(columnIndex);
+                    }
+                }
+
+                // Silinecek sütunun indeksini belirt
+                var columnIndexToDelete = 6; // Örneğin, 1. sütunu sil
+
+                // Belirtilen sütunu sil
+                deleteColumn(columnIndexToDelete);
+
+
+                var inputHtml = document.getElementsByTagName('head')[0].innerHTML + secTable.outerHTML;
+                var dataToSend = { inputData: inputHtml };
+
+                fetch('/AnaSayfa/ConvertToPdf', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0]
+                    },
+                    body: JSON.stringify(dataToSend)
+                })
+                    .then(response => response.blob())
+                    .then(blob => {
+                        // Code to download the PDF file
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = url;
+                        a.download = 'converted.pdf';
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+            // PDF KISMINA AİTTİR
+
+
+            //EXCEL E AİT
+                 document.getElementById('exportExcelButton').addEventListener('click', function () {
+                // Tabloyu içeren elementin ID'si ile tabloyu seç
+                var myTable = document.getElementById('myTable');
+                var secTable = myTable.cloneNode(true);
+                // Belirli bir sütunu (kolonu) silen fonksiyon
+                function deleteColumn(columnIndex) {
+                    for (var i = 0; i < secTable.rows.length; i++) {
+                        secTable.rows[i].deleteCell(columnIndex);
+                    }
+                }
+
+                // Silinecek sütunun indeksini belirt
+                var columnIndexToDelete = 6; // Örneğin, 1. sütunu sil
+
+                // Belirtilen sütunu sil
+                deleteColumn(columnIndexToDelete);
+
+                // Export the modified table to Excel
+                var wb = XLSX.utils.table_to_book(secTable, { sheet: "Sheet1" });
+                var wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'blob' });
+
+                // Code to download the Excel file
+                saveAs(wbout, 'table.xlsx');
+            });
+            function saveAs(blob, fileName) {
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                var url = window.URL.createObjectURL(blob);
+                a.href = url;
+                a.download = fileName;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }
+
+
+
+        </script>
+    </div>
+</body>
+</html>

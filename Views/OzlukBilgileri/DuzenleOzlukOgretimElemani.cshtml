@@ -1,0 +1,63 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model OgretimElemani
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bilgileri Düzenle</h2>
+@using (Html.BeginForm("DuzenleOzlukOgretimElemani", "OzlukBilgileri", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Ad">Adı :</label>
+                    <input type="text" id="Adi" name="Adi" class="form-control" value="@Model.Adi" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Soyadi">Soyadı :</label>
+                    <input type="text" id="Soyadi" name="Soyadi" class="form-control" value="@Model.Soyadi " />
+                </div>
+
+                <div class="form-group">
+                    <label for="BolumAdi">Bölüm Adı :</label>
+                    <input type="text" id="BolumAdi" name="BolumAdi" class="form-control" value="@Model.Bolum.BolumAdi " />
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-success">Güncelle</button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm("IndexOgretimElemani", "OzlukBilgileri", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1">
+
+                <button type="submit" class="btn btn-danger">Kapat</button>
+
+            </div>
+
+
+
+        </div>
+    </div>
+   
+
+
+
+
+}

@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="obsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bolum">
+    <Key>
+      <PropertyRef Name="BolumID" />
+    </Key>
+    <Property Name="BolumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BolumAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProgramTuru" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OgretimTuru" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OgrenimDili" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="WebAdresi" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Danismanlik">
+    <Key>
+      <PropertyRef Name="DanismanlikID" />
+    </Key>
+    <Property Name="DanismanlikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OgrElmID" Type="int" Nullable="false" />
+    <Property Name="OgrenciID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Degerlendirme">
+    <Key>
+      <PropertyRef Name="DegerlendirmeID" />
+    </Key>
+    <Property Name="DegerlendirmeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SinavID" Type="int" Nullable="false" />
+    <Property Name="OgrenciID" Type="int" Nullable="false" />
+    <Property Name="SinavNotu" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DersAcma">
+    <Key>
+      <PropertyRef Name="DersAcmaID" />
+    </Key>
+    <Property Name="DersAcmaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AkademikYil" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AkademikDonem" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MufredatID" Type="int" Nullable="false" />
+    <Property Name="Kontenjan" Type="int" Nullable="false" />
+    <Property Name="OgrElmID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DersAlma">
+    <Key>
+      <PropertyRef Name="DersAlmaID" />
+    </Key>
+    <Property Name="DersAlmaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DersAcmaID" Type="int" Nullable="false" />
+    <Property Name="OgrenciID" Type="int" Nullable="false" />
+    <Property Name="Durum" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DersHavuzu">
+    <Key>
+      <PropertyRef Name="DersID" />
+    </Key>
+    <Property Name="DersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DersKodu" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DersAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DersDili" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DersSeviyesi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DersTuru" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Teorik" Type="int" Nullable="false" />
+    <Property Name="Uygulama" Type="int" Nullable="false" />
+    <Property Name="Kredi" Type="float" Nullable="false" />
+    <Property Name="ECTS" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Derslik">
+    <Key>
+      <PropertyRef Name="DerslikID" />
+    </Key>
+    <Property Name="DerslikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DerslikAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DerslikTuru" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Kapasite" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DersProgrami">
+    <Key>
+      <PropertyRef Name="DersPrgID" />
+    </Key>
+    <Property Name="DersPrgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DersAcmaID" Type="int" Nullable="false" />
+    <Property Name="DerslikID" Type="int" Nullable="false" />
+    <Property Name="DersGunu" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DersSaati" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="KullaniciID" />
+    </Key>
+    <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Parola" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="KullaniciTuru" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mufredat">
+    <Key>
+      <PropertyRef Name="MufredatID" />
+    </Key>
+    <Property Name="MufredatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BolumID" Type="int" Nullable="false" />
+    <Property Name="DersID" Type="int" Nullable="false" />
+    <Property Name="AkademikYil" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AkademikDonem" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DersDonemi" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ogrenci">
+    <Key>
+      <PropertyRef Name="OgrenciID" />
+    </Key>
+    <Property Name="OgrenciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BolumID" Type="int" Nullable="false" />
+    <Property Name="OgrenciNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Durumu" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="KayitTarihi" Type="date" Nullable="false" />
+    <Property Name="AyrilmaTarihi" Type="date" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Soyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TCKimlikNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cinsiyet" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DogumTarihi" Type="date" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OgretimElemani">
+    <Key>
+      <PropertyRef Name="OgrElmD" />
+    </Key>
+    <Property Name="OgrElmD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BolumID" Type="int" Nullable="false" />
+    <Property Name="KurumSicilNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Unvan" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Soyadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TCKimlikNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cinsiyet" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DogumTarihi" Type="date" Nullable="false" />
+    <Property Name="KullaniciID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sinav">
+    <Key>
+      <PropertyRef Name="SinavID" />
+    </Key>
+    <Property Name="SinavID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DersAcmaID" Type="int" Nullable="false" />
+    <Property Name="SinavTuru" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="EtkiOrani" Type="int" Nullable="false" />
+    <Property Name="SinavTarihi" Type="date" Nullable="false" />
+    <Property Name="SinavSaati" Type="time" Precision="7" Nullable="false" />
+    <Property Name="DerslikID" Type="int" Nullable="false" />
+    <Property Name="OgrElmID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Danismanlik_Ogrenci">
+    <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="1" />
+    <End Role="Danismanlik" Type="Self.Danismanlik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenci">
+        <PropertyRef Name="OgrenciID" />
+      </Principal>
+      <Dependent Role="Danismanlik">
+        <PropertyRef Name="OgrenciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Danismanlik_OgretimElemani">
+    <End Role="OgretimElemani" Type="Self.OgretimElemani" Multiplicity="1" />
+    <End Role="Danismanlik" Type="Self.Danismanlik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OgretimElemani">
+        <PropertyRef Name="OgrElmD" />
+      </Principal>
+      <Dependent Role="Danismanlik">
+        <PropertyRef Name="OgrElmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Degerlendirme_Ogrenci">
+    <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="1" />
+    <End Role="Degerlendirme" Type="Self.Degerlendirme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenci">
+        <PropertyRef Name="OgrenciID" />
+      </Principal>
+      <Dependent Role="Degerlendirme">
+        <PropertyRef Name="OgrenciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Degerlendirme_Sinav">
+    <End Role="Sinav" Type="Self.Sinav" Multiplicity="1" />
+    <End Role="Degerlendirme" Type="Self.Degerlendirme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sinav">
+        <PropertyRef Name="SinavID" />
+      </Principal>
+      <Dependent Role="Degerlendirme">
+        <PropertyRef Name="SinavID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersAcma_Mufredat">
+    <End Role="Mufredat" Type="Self.Mufredat" Multiplicity="1" />
+    <End Role="DersAcma" Type="Self.DersAcma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mufredat">
+        <PropertyRef Name="MufredatID" />
+      </Principal>
+      <Dependent Role="DersAcma">
+        <PropertyRef Name="MufredatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersAlma_DersAcma">
+    <End Role="DersAcma" Type="Self.DersAcma" Multiplicity="1" />
+    <End Role="DersAlma" Type="Self.DersAlma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DersAcma">
+        <PropertyRef Name="DersAcmaID" />
+      </Principal>
+      <Dependent Role="DersAlma">
+        <PropertyRef Name="DersAcmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersHavuzu_Derslik">
+    <End Role="Derslik" Type="Self.Derslik" Multiplicity="1" />
+    <End Role="DersHavuzu" Type="Self.DersHavuzu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Derslik">
+        <PropertyRef Name="DerslikID" />
+      </Principal>
+      <Dependent Role="DersHavuzu">
+        <PropertyRef Name="DersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersProgrami_DersAcma">
+    <End Role="DersAcma" Type="Self.DersAcma" Multiplicity="1" />
+    <End Role="DersProgrami" Type="Self.DersProgrami" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DersAcma">
+        <PropertyRef Name="DersAcmaID" />
+      </Principal>
+      <Dependent Role="DersProgrami">
+        <PropertyRef Name="DersAcmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersProgrami_Derslik">
+    <End Role="Derslik" Type="Self.Derslik" Multiplicity="1" />
+    <End Role="DersProgrami" Type="Self.DersProgrami" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Derslik">
+        <PropertyRef Name="DerslikID" />
+      </Principal>
+      <Dependent Role="DersProgrami">
+        <PropertyRef Name="DerslikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mufredat_Bolum">
+    <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+    <End Role="Mufredat" Type="Self.Mufredat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolum">
+        <PropertyRef Name="BolumID" />
+      </Principal>
+      <Dependent Role="Mufredat">
+        <PropertyRef Name="BolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mufredat_Derslik">
+    <End Role="Derslik" Type="Self.Derslik" Multiplicity="1" />
+    <End Role="Mufredat" Type="Self.Mufredat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Derslik">
+        <PropertyRef Name="DerslikID" />
+      </Principal>
+      <Dependent Role="Mufredat">
+        <PropertyRef Name="DersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ogrenci_Bolum">
+    <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+    <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolum">
+        <PropertyRef Name="BolumID" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="BolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OgretimElemani_Bolum">
+    <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+    <End Role="OgretimElemani" Type="Self.OgretimElemani" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolum">
+        <PropertyRef Name="BolumID" />
+      </Principal>
+      <Dependent Role="OgretimElemani">
+        <PropertyRef Name="BolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sinav_DersAcma">
+    <End Role="DersAcma" Type="Self.DersAcma" Multiplicity="1" />
+    <End Role="Sinav" Type="Self.Sinav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DersAcma">
+        <PropertyRef Name="DersAcmaID" />
+      </Principal>
+      <Dependent Role="Sinav">
+        <PropertyRef Name="DersAcmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sinav_Derslik">
+    <End Role="Derslik" Type="Self.Derslik" Multiplicity="1" />
+    <End Role="Sinav" Type="Self.Sinav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Derslik">
+        <PropertyRef Name="DerslikID" />
+      </Principal>
+      <Dependent Role="Sinav">
+        <PropertyRef Name="DerslikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="obsModelStoreContainer">
+    <EntitySet Name="Bolum" EntityType="Self.Bolum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Danismanlik" EntityType="Self.Danismanlik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Degerlendirme" EntityType="Self.Degerlendirme" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DersAcma" EntityType="Self.DersAcma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DersAlma" EntityType="Self.DersAlma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DersHavuzu" EntityType="Self.DersHavuzu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Derslik" EntityType="Self.Derslik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DersProgrami" EntityType="Self.DersProgrami" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mufredat" EntityType="Self.Mufredat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OgretimElemani" EntityType="Self.OgretimElemani" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sinav" EntityType="Self.Sinav" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Danismanlik_Ogrenci" Association="Self.FK_Danismanlik_Ogrenci">
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+      <End Role="Danismanlik" EntitySet="Danismanlik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Danismanlik_OgretimElemani" Association="Self.FK_Danismanlik_OgretimElemani">
+      <End Role="OgretimElemani" EntitySet="OgretimElemani" />
+      <End Role="Danismanlik" EntitySet="Danismanlik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Degerlendirme_Ogrenci" Association="Self.FK_Degerlendirme_Ogrenci">
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+      <End Role="Degerlendirme" EntitySet="Degerlendirme" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Degerlendirme_Sinav" Association="Self.FK_Degerlendirme_Sinav">
+      <End Role="Sinav" EntitySet="Sinav" />
+      <End Role="Degerlendirme" EntitySet="Degerlendirme" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersAcma_Mufredat" Association="Self.FK_DersAcma_Mufredat">
+      <End Role="Mufredat" EntitySet="Mufredat" />
+      <End Role="DersAcma" EntitySet="DersAcma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersAlma_DersAcma" Association="Self.FK_DersAlma_DersAcma">
+      <End Role="DersAcma" EntitySet="DersAcma" />
+      <End Role="DersAlma" EntitySet="DersAlma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersHavuzu_Derslik" Association="Self.FK_DersHavuzu_Derslik">
+      <End Role="Derslik" EntitySet="Derslik" />
+      <End Role="DersHavuzu" EntitySet="DersHavuzu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersProgrami_DersAcma" Association="Self.FK_DersProgrami_DersAcma">
+      <End Role="DersAcma" EntitySet="DersAcma" />
+      <End Role="DersProgrami" EntitySet="DersProgrami" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersProgrami_Derslik" Association="Self.FK_DersProgrami_Derslik">
+      <End Role="Derslik" EntitySet="Derslik" />
+      <End Role="DersProgrami" EntitySet="DersProgrami" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mufredat_Bolum" Association="Self.FK_Mufredat_Bolum">
+      <End Role="Bolum" EntitySet="Bolum" />
+      <End Role="Mufredat" EntitySet="Mufredat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mufredat_Derslik" Association="Self.FK_Mufredat_Derslik">
+      <End Role="Derslik" EntitySet="Derslik" />
+      <End Role="Mufredat" EntitySet="Mufredat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ogrenci_Bolum" Association="Self.FK_Ogrenci_Bolum">
+      <End Role="Bolum" EntitySet="Bolum" />
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OgretimElemani_Bolum" Association="Self.FK_OgretimElemani_Bolum">
+      <End Role="Bolum" EntitySet="Bolum" />
+      <End Role="OgretimElemani" EntitySet="OgretimElemani" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sinav_DersAcma" Association="Self.FK_Sinav_DersAcma">
+      <End Role="DersAcma" EntitySet="DersAcma" />
+      <End Role="Sinav" EntitySet="Sinav" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sinav_Derslik" Association="Self.FK_Sinav_Derslik">
+      <End Role="Derslik" EntitySet="Derslik" />
+      <End Role="Sinav" EntitySet="Sinav" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

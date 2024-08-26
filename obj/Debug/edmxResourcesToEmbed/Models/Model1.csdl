@@ -1,0 +1,518 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="obsModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="obsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bolum" EntityType="obsModel1.Bolum" />
+    <EntitySet Name="Danismanlik" EntityType="obsModel1.Danismanlik" />
+    <EntitySet Name="Degerlendirme" EntityType="obsModel1.Degerlendirme" />
+    <EntitySet Name="DersAcma" EntityType="obsModel1.DersAcma" />
+    <EntitySet Name="DersAlma" EntityType="obsModel1.DersAlma" />
+    <EntitySet Name="DersHavuzu" EntityType="obsModel1.DersHavuzu" />
+    <EntitySet Name="Derslik" EntityType="obsModel1.Derslik" />
+    <EntitySet Name="DersProgrami" EntityType="obsModel1.DersProgrami" />
+    <EntitySet Name="Kullanici" EntityType="obsModel1.Kullanici" />
+    <EntitySet Name="Mufredat" EntityType="obsModel1.Mufredat" />
+    <EntitySet Name="Ogrenci" EntityType="obsModel1.Ogrenci" />
+    <EntitySet Name="OgretimElemani" EntityType="obsModel1.OgretimElemani" />
+    <EntitySet Name="Sinav" EntityType="obsModel1.Sinav" />
+    <EntitySet Name="sysdiagrams" EntityType="obsModel1.sysdiagrams" />
+    <AssociationSet Name="FK_Mufredat_Bolum" Association="obsModel1.FK_Mufredat_Bolum">
+      <End Role="Bolum" EntitySet="Bolum" />
+      <End Role="Mufredat" EntitySet="Mufredat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ogrenci_Bolum" Association="obsModel1.FK_Ogrenci_Bolum">
+      <End Role="Bolum" EntitySet="Bolum" />
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OgretimElemani_Bolum" Association="obsModel1.FK_OgretimElemani_Bolum">
+      <End Role="Bolum" EntitySet="Bolum" />
+      <End Role="OgretimElemani" EntitySet="OgretimElemani" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Danismanlik_Ogrenci" Association="obsModel1.FK_Danismanlik_Ogrenci">
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+      <End Role="Danismanlik" EntitySet="Danismanlik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Danismanlik_OgretimElemani" Association="obsModel1.FK_Danismanlik_OgretimElemani">
+      <End Role="OgretimElemani" EntitySet="OgretimElemani" />
+      <End Role="Danismanlik" EntitySet="Danismanlik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Degerlendirme_Ogrenci" Association="obsModel1.FK_Degerlendirme_Ogrenci">
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+      <End Role="Degerlendirme" EntitySet="Degerlendirme" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Degerlendirme_Sinav" Association="obsModel1.FK_Degerlendirme_Sinav">
+      <End Role="Sinav" EntitySet="Sinav" />
+      <End Role="Degerlendirme" EntitySet="Degerlendirme" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersAcma_Mufredat" Association="obsModel1.FK_DersAcma_Mufredat">
+      <End Role="Mufredat" EntitySet="Mufredat" />
+      <End Role="DersAcma" EntitySet="DersAcma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersAcma_OgretimElemani" Association="obsModel1.FK_DersAcma_OgretimElemani">
+      <End Role="OgretimElemani" EntitySet="OgretimElemani" />
+      <End Role="DersAcma" EntitySet="DersAcma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersAlma_DersAcma" Association="obsModel1.FK_DersAlma_DersAcma">
+      <End Role="DersAcma" EntitySet="DersAcma" />
+      <End Role="DersAlma" EntitySet="DersAlma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersProgrami_DersAcma" Association="obsModel1.FK_DersProgrami_DersAcma">
+      <End Role="DersAcma" EntitySet="DersAcma" />
+      <End Role="DersProgrami" EntitySet="DersProgrami" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sinav_DersAcma" Association="obsModel1.FK_Sinav_DersAcma">
+      <End Role="DersAcma" EntitySet="DersAcma" />
+      <End Role="Sinav" EntitySet="Sinav" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersAlma_Ogrenci" Association="obsModel1.FK_DersAlma_Ogrenci">
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+      <End Role="DersAlma" EntitySet="DersAlma" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mufredat_DersHavuzu" Association="obsModel1.FK_Mufredat_DersHavuzu">
+      <End Role="DersHavuzu" EntitySet="DersHavuzu" />
+      <End Role="Mufredat" EntitySet="Mufredat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DersProgrami_Derslik" Association="obsModel1.FK_DersProgrami_Derslik">
+      <End Role="Derslik" EntitySet="Derslik" />
+      <End Role="DersProgrami" EntitySet="DersProgrami" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sinav_Derslik" Association="obsModel1.FK_Sinav_Derslik">
+      <End Role="Derslik" EntitySet="Derslik" />
+      <End Role="Sinav" EntitySet="Sinav" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ogrenci_Kullanici" Association="obsModel1.FK_Ogrenci_Kullanici">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OgretimElemani_Kullanici" Association="obsModel1.FK_OgretimElemani_Kullanici">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="OgretimElemani" EntitySet="OgretimElemani" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sinav_OgretimElemani" Association="obsModel1.FK_Sinav_OgretimElemani">
+      <End Role="OgretimElemani" EntitySet="OgretimElemani" />
+      <End Role="Sinav" EntitySet="Sinav" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Bolum">
+    <Key>
+      <PropertyRef Name="BolumID" />
+    </Key>
+    <Property Name="BolumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BolumAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProgramTuru" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OgretimTuru" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OgrenimDili" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WebAdresi" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Mufredat" Relationship="obsModel1.FK_Mufredat_Bolum" FromRole="Bolum" ToRole="Mufredat" />
+    <NavigationProperty Name="Ogrenci" Relationship="obsModel1.FK_Ogrenci_Bolum" FromRole="Bolum" ToRole="Ogrenci" />
+    <NavigationProperty Name="OgretimElemani" Relationship="obsModel1.FK_OgretimElemani_Bolum" FromRole="Bolum" ToRole="OgretimElemani" />
+  </EntityType>
+  <EntityType Name="Danismanlik">
+    <Key>
+      <PropertyRef Name="DanismanlikID" />
+    </Key>
+    <Property Name="DanismanlikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgrElmID" Type="Int32" Nullable="false" />
+    <Property Name="OgrenciID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Ogrenci" Relationship="obsModel1.FK_Danismanlik_Ogrenci" FromRole="Danismanlik" ToRole="Ogrenci" />
+    <NavigationProperty Name="OgretimElemani" Relationship="obsModel1.FK_Danismanlik_OgretimElemani" FromRole="Danismanlik" ToRole="OgretimElemani" />
+  </EntityType>
+  <EntityType Name="Degerlendirme">
+    <Key>
+      <PropertyRef Name="DegerlendirmeID" />
+    </Key>
+    <Property Name="DegerlendirmeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SinavID" Type="Int32" Nullable="false" />
+    <Property Name="OgrenciID" Type="Int32" Nullable="false" />
+    <Property Name="SinavNotu" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Ogrenci" Relationship="obsModel1.FK_Degerlendirme_Ogrenci" FromRole="Degerlendirme" ToRole="Ogrenci" />
+    <NavigationProperty Name="Sinav" Relationship="obsModel1.FK_Degerlendirme_Sinav" FromRole="Degerlendirme" ToRole="Sinav" />
+  </EntityType>
+  <EntityType Name="DersAcma">
+    <Key>
+      <PropertyRef Name="DersAcmaID" />
+    </Key>
+    <Property Name="DersAcmaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AkademikYil" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AkademikDonem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MufredatID" Type="Int32" Nullable="false" />
+    <Property Name="Kontenjan" Type="Int32" Nullable="false" />
+    <Property Name="OgrElmID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Mufredat" Relationship="obsModel1.FK_DersAcma_Mufredat" FromRole="DersAcma" ToRole="Mufredat" />
+    <NavigationProperty Name="OgretimElemani" Relationship="obsModel1.FK_DersAcma_OgretimElemani" FromRole="DersAcma" ToRole="OgretimElemani" />
+    <NavigationProperty Name="DersAlma" Relationship="obsModel1.FK_DersAlma_DersAcma" FromRole="DersAcma" ToRole="DersAlma" />
+    <NavigationProperty Name="DersProgrami" Relationship="obsModel1.FK_DersProgrami_DersAcma" FromRole="DersAcma" ToRole="DersProgrami" />
+    <NavigationProperty Name="Sinav" Relationship="obsModel1.FK_Sinav_DersAcma" FromRole="DersAcma" ToRole="Sinav" />
+  </EntityType>
+  <EntityType Name="DersAlma">
+    <Key>
+      <PropertyRef Name="DersAlmaID" />
+    </Key>
+    <Property Name="DersAlmaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DersAcmaID" Type="Int32" Nullable="false" />
+    <Property Name="OgrenciID" Type="Int32" Nullable="false" />
+    <Property Name="Durum" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DersAcma" Relationship="obsModel1.FK_DersAlma_DersAcma" FromRole="DersAlma" ToRole="DersAcma" />
+    <NavigationProperty Name="Ogrenci" Relationship="obsModel1.FK_DersAlma_Ogrenci" FromRole="DersAlma" ToRole="Ogrenci" />
+  </EntityType>
+  <EntityType Name="DersHavuzu">
+    <Key>
+      <PropertyRef Name="DersID" />
+    </Key>
+    <Property Name="DersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DersKodu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DersAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DersDili" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DersSeviyesi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DersTuru" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Teorik" Type="Int32" Nullable="false" />
+    <Property Name="Uygulama" Type="Int32" Nullable="false" />
+    <Property Name="Kredi" Type="Double" Nullable="false" />
+    <Property Name="ECTS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Mufredat" Relationship="obsModel1.FK_Mufredat_DersHavuzu" FromRole="DersHavuzu" ToRole="Mufredat" />
+  </EntityType>
+  <EntityType Name="Derslik">
+    <Key>
+      <PropertyRef Name="DerslikID" />
+    </Key>
+    <Property Name="DerslikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DerslikAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DerslikTuru" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Kapasite" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DersProgrami" Relationship="obsModel1.FK_DersProgrami_Derslik" FromRole="Derslik" ToRole="DersProgrami" />
+    <NavigationProperty Name="Sinav" Relationship="obsModel1.FK_Sinav_Derslik" FromRole="Derslik" ToRole="Sinav" />
+  </EntityType>
+  <EntityType Name="DersProgrami">
+    <Key>
+      <PropertyRef Name="DersPrgID" />
+    </Key>
+    <Property Name="DersPrgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DersAcmaID" Type="Int32" Nullable="false" />
+    <Property Name="DerslikID" Type="Int32" Nullable="false" />
+    <Property Name="DersGunu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DersSaati" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DersAcma" Relationship="obsModel1.FK_DersProgrami_DersAcma" FromRole="DersProgrami" ToRole="DersAcma" />
+    <NavigationProperty Name="Derslik" Relationship="obsModel1.FK_DersProgrami_Derslik" FromRole="DersProgrami" ToRole="Derslik" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="KullaniciID" />
+    </Key>
+    <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Parola" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KullaniciTuru" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ogrenci" Relationship="obsModel1.FK_Ogrenci_Kullanici" FromRole="Kullanici" ToRole="Ogrenci" />
+    <NavigationProperty Name="OgretimElemani" Relationship="obsModel1.FK_OgretimElemani_Kullanici" FromRole="Kullanici" ToRole="OgretimElemani" />
+  </EntityType>
+  <EntityType Name="Mufredat">
+    <Key>
+      <PropertyRef Name="MufredatID" />
+    </Key>
+    <Property Name="MufredatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BolumID" Type="Int32" Nullable="false" />
+    <Property Name="DersID" Type="Int32" Nullable="false" />
+    <Property Name="AkademikYil" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AkademikDonem" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DersDonemi" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bolum" Relationship="obsModel1.FK_Mufredat_Bolum" FromRole="Mufredat" ToRole="Bolum" />
+    <NavigationProperty Name="DersAcma" Relationship="obsModel1.FK_DersAcma_Mufredat" FromRole="Mufredat" ToRole="DersAcma" />
+    <NavigationProperty Name="DersHavuzu" Relationship="obsModel1.FK_Mufredat_DersHavuzu" FromRole="Mufredat" ToRole="DersHavuzu" />
+  </EntityType>
+  <EntityType Name="Ogrenci">
+    <Key>
+      <PropertyRef Name="OgrenciID" />
+    </Key>
+    <Property Name="OgrenciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BolumID" Type="Int32" Nullable="false" />
+    <Property Name="OgrenciNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Durumu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KayitTarihi" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AyrilmaTarihi" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Adi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Soyadi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TCKimlikNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cinsiyet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bolum" Relationship="obsModel1.FK_Ogrenci_Bolum" FromRole="Ogrenci" ToRole="Bolum" />
+    <NavigationProperty Name="Danismanlik" Relationship="obsModel1.FK_Danismanlik_Ogrenci" FromRole="Ogrenci" ToRole="Danismanlik" />
+    <NavigationProperty Name="Degerlendirme" Relationship="obsModel1.FK_Degerlendirme_Ogrenci" FromRole="Ogrenci" ToRole="Degerlendirme" />
+    <NavigationProperty Name="DersAlma" Relationship="obsModel1.FK_DersAlma_Ogrenci" FromRole="Ogrenci" ToRole="DersAlma" />
+    <NavigationProperty Name="Kullanici" Relationship="obsModel1.FK_Ogrenci_Kullanici" FromRole="Ogrenci" ToRole="Kullanici" />
+  </EntityType>
+  <EntityType Name="OgretimElemani">
+    <Key>
+      <PropertyRef Name="OgrElmD" />
+    </Key>
+    <Property Name="OgrElmD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BolumID" Type="Int32" Nullable="false" />
+    <Property Name="KurumSicilNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Unvan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Soyadi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TCKimlikNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cinsiyet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bolum" Relationship="obsModel1.FK_OgretimElemani_Bolum" FromRole="OgretimElemani" ToRole="Bolum" />
+    <NavigationProperty Name="Danismanlik" Relationship="obsModel1.FK_Danismanlik_OgretimElemani" FromRole="OgretimElemani" ToRole="Danismanlik" />
+    <NavigationProperty Name="DersAcma" Relationship="obsModel1.FK_DersAcma_OgretimElemani" FromRole="OgretimElemani" ToRole="DersAcma" />
+    <NavigationProperty Name="Kullanici" Relationship="obsModel1.FK_OgretimElemani_Kullanici" FromRole="OgretimElemani" ToRole="Kullanici" />
+    <NavigationProperty Name="Sinav" Relationship="obsModel1.FK_Sinav_OgretimElemani" FromRole="OgretimElemani" ToRole="Sinav" />
+  </EntityType>
+  <EntityType Name="Sinav">
+    <Key>
+      <PropertyRef Name="SinavID" />
+    </Key>
+    <Property Name="SinavID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DersAcmaID" Type="Int32" Nullable="false" />
+    <Property Name="SinavTuru" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EtkiOrani" Type="Int32" Nullable="false" />
+    <Property Name="SinavTarihi" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SinavSaati" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="DerslikID" Type="Int32" Nullable="false" />
+    <Property Name="OgrElmID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Degerlendirme" Relationship="obsModel1.FK_Degerlendirme_Sinav" FromRole="Sinav" ToRole="Degerlendirme" />
+    <NavigationProperty Name="DersAcma" Relationship="obsModel1.FK_Sinav_DersAcma" FromRole="Sinav" ToRole="DersAcma" />
+    <NavigationProperty Name="Derslik" Relationship="obsModel1.FK_Sinav_Derslik" FromRole="Sinav" ToRole="Derslik" />
+    <NavigationProperty Name="OgretimElemani" Relationship="obsModel1.FK_Sinav_OgretimElemani" FromRole="Sinav" ToRole="OgretimElemani" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Mufredat_Bolum">
+    <End Type="obsModel1.Bolum" Role="Bolum" Multiplicity="1" />
+    <End Type="obsModel1.Mufredat" Role="Mufredat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolum">
+        <PropertyRef Name="BolumID" />
+      </Principal>
+      <Dependent Role="Mufredat">
+        <PropertyRef Name="BolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ogrenci_Bolum">
+    <End Type="obsModel1.Bolum" Role="Bolum" Multiplicity="1" />
+    <End Type="obsModel1.Ogrenci" Role="Ogrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolum">
+        <PropertyRef Name="BolumID" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="BolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OgretimElemani_Bolum">
+    <End Type="obsModel1.Bolum" Role="Bolum" Multiplicity="1" />
+    <End Type="obsModel1.OgretimElemani" Role="OgretimElemani" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolum">
+        <PropertyRef Name="BolumID" />
+      </Principal>
+      <Dependent Role="OgretimElemani">
+        <PropertyRef Name="BolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Danismanlik_Ogrenci">
+    <End Type="obsModel1.Ogrenci" Role="Ogrenci" Multiplicity="1" />
+    <End Type="obsModel1.Danismanlik" Role="Danismanlik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenci">
+        <PropertyRef Name="OgrenciID" />
+      </Principal>
+      <Dependent Role="Danismanlik">
+        <PropertyRef Name="OgrenciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Danismanlik_OgretimElemani">
+    <End Type="obsModel1.OgretimElemani" Role="OgretimElemani" Multiplicity="1" />
+    <End Type="obsModel1.Danismanlik" Role="Danismanlik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OgretimElemani">
+        <PropertyRef Name="OgrElmD" />
+      </Principal>
+      <Dependent Role="Danismanlik">
+        <PropertyRef Name="OgrElmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Degerlendirme_Ogrenci">
+    <End Type="obsModel1.Ogrenci" Role="Ogrenci" Multiplicity="1" />
+    <End Type="obsModel1.Degerlendirme" Role="Degerlendirme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenci">
+        <PropertyRef Name="OgrenciID" />
+      </Principal>
+      <Dependent Role="Degerlendirme">
+        <PropertyRef Name="OgrenciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Degerlendirme_Sinav">
+    <End Type="obsModel1.Sinav" Role="Sinav" Multiplicity="1" />
+    <End Type="obsModel1.Degerlendirme" Role="Degerlendirme" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sinav">
+        <PropertyRef Name="SinavID" />
+      </Principal>
+      <Dependent Role="Degerlendirme">
+        <PropertyRef Name="SinavID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersAcma_Mufredat">
+    <End Type="obsModel1.Mufredat" Role="Mufredat" Multiplicity="1" />
+    <End Type="obsModel1.DersAcma" Role="DersAcma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mufredat">
+        <PropertyRef Name="MufredatID" />
+      </Principal>
+      <Dependent Role="DersAcma">
+        <PropertyRef Name="MufredatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersAcma_OgretimElemani">
+    <End Type="obsModel1.OgretimElemani" Role="OgretimElemani" Multiplicity="1" />
+    <End Type="obsModel1.DersAcma" Role="DersAcma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OgretimElemani">
+        <PropertyRef Name="OgrElmD" />
+      </Principal>
+      <Dependent Role="DersAcma">
+        <PropertyRef Name="OgrElmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersAlma_DersAcma">
+    <End Type="obsModel1.DersAcma" Role="DersAcma" Multiplicity="1" />
+    <End Type="obsModel1.DersAlma" Role="DersAlma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DersAcma">
+        <PropertyRef Name="DersAcmaID" />
+      </Principal>
+      <Dependent Role="DersAlma">
+        <PropertyRef Name="DersAcmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersProgrami_DersAcma">
+    <End Type="obsModel1.DersAcma" Role="DersAcma" Multiplicity="1" />
+    <End Type="obsModel1.DersProgrami" Role="DersProgrami" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DersAcma">
+        <PropertyRef Name="DersAcmaID" />
+      </Principal>
+      <Dependent Role="DersProgrami">
+        <PropertyRef Name="DersAcmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sinav_DersAcma">
+    <End Type="obsModel1.DersAcma" Role="DersAcma" Multiplicity="1" />
+    <End Type="obsModel1.Sinav" Role="Sinav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DersAcma">
+        <PropertyRef Name="DersAcmaID" />
+      </Principal>
+      <Dependent Role="Sinav">
+        <PropertyRef Name="DersAcmaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersAlma_Ogrenci">
+    <End Type="obsModel1.Ogrenci" Role="Ogrenci" Multiplicity="1" />
+    <End Type="obsModel1.DersAlma" Role="DersAlma" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenci">
+        <PropertyRef Name="OgrenciID" />
+      </Principal>
+      <Dependent Role="DersAlma">
+        <PropertyRef Name="OgrenciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mufredat_DersHavuzu">
+    <End Type="obsModel1.DersHavuzu" Role="DersHavuzu" Multiplicity="1" />
+    <End Type="obsModel1.Mufredat" Role="Mufredat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DersHavuzu">
+        <PropertyRef Name="DersID" />
+      </Principal>
+      <Dependent Role="Mufredat">
+        <PropertyRef Name="DersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DersProgrami_Derslik">
+    <End Type="obsModel1.Derslik" Role="Derslik" Multiplicity="1" />
+    <End Type="obsModel1.DersProgrami" Role="DersProgrami" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Derslik">
+        <PropertyRef Name="DerslikID" />
+      </Principal>
+      <Dependent Role="DersProgrami">
+        <PropertyRef Name="DerslikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sinav_Derslik">
+    <End Type="obsModel1.Derslik" Role="Derslik" Multiplicity="1" />
+    <End Type="obsModel1.Sinav" Role="Sinav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Derslik">
+        <PropertyRef Name="DerslikID" />
+      </Principal>
+      <Dependent Role="Sinav">
+        <PropertyRef Name="DerslikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ogrenci_Kullanici">
+    <End Type="obsModel1.Kullanici" Role="Kullanici" Multiplicity="1" />
+    <End Type="obsModel1.Ogrenci" Role="Ogrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OgretimElemani_Kullanici">
+    <End Type="obsModel1.Kullanici" Role="Kullanici" Multiplicity="1" />
+    <End Type="obsModel1.OgretimElemani" Role="OgretimElemani" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="KullaniciID" />
+      </Principal>
+      <Dependent Role="OgretimElemani">
+        <PropertyRef Name="KullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sinav_OgretimElemani">
+    <End Type="obsModel1.OgretimElemani" Role="OgretimElemani" Multiplicity="1" />
+    <End Type="obsModel1.Sinav" Role="Sinav" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OgretimElemani">
+        <PropertyRef Name="OgrElmD" />
+      </Principal>
+      <Dependent Role="Sinav">
+        <PropertyRef Name="OgrElmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

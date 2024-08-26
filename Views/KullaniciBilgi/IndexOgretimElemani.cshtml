@@ -1,0 +1,68 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<OgretimElemani>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+
+
+        @if (User.IsInRole("Öğretim Elemanı"))
+        {
+            <th>Kurum Sicil No </th>
+            <th>Unvan</th>
+            <th>Adı</th>
+            <th>Soyadı</th>
+            <th>TC Kimlik No</th>
+            <th>Cinsiyet</th>
+            <th>Doğum Tarihi</th>
+            <th>İşlem</th>
+
+        }
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+
+            @if (User.IsInRole("Öğretim Elemanı"))
+            {
+
+                <td>@item.KurumSicilNo</td>
+                <td>@item.Unvan</td>
+                <td>@item.Adi</td>
+                <td>@item.Soyadi</td>
+                <td>@item.TCKimlikNo</td>
+                <td>@item.Cinsiyet</td>
+                <td>@item.DogumTarihi</td>
+                <td>@Html.ActionLink("Güncelle", "GuncelleOgretimElemani", new { id = item.KurumSicilNo }, new { @class = "btn btn-success", onclick = "return confirm('Güncellemek istiyor musunuz?')" })</td>
+                
+
+            }
+            
+
+
+
+
+        </tr>
+
+
+
+        //CRUD İŞLEMLERİNDE KALDIM KULLANICI ADINA BASTIĞINDA BİLGİLER GELMESİ GEREKİYOR
+        //Bu bilgile düzenlenmeli vs vs
+
+
+
+
+    }
+
+
+
+
+
+</table>
+

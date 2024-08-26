@@ -1,0 +1,56 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<DersProgrami>
+@{
+    var gunler = new List<string> { "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma" };
+    var saatler = Enumerable.Range(8, 12).Select(h => $"{h}:00").ToList();
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ders Programı</h1>
+<table class="table table-bordered">
+    @if (User.IsInRole("Öğrenci"))
+    {
+        <thead>
+            <tr>
+                <th>Saat/Gün</th>
+                @foreach (var gun in gunler)
+                {
+                    <th>@gun</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var saat in saatler)
+            {
+                <tr>
+                    <td>@saat</td>
+                    @foreach (var gun in gunler)
+                    {
+                        var item = Model.FirstOrDefault(d => d.DersGunu == gun && d.DersSaati == Convert.ToInt32(saat.Split(':')[0]));
+
+
+                        <td>
+                            @if (item != null)
+                            {
+                                <div>
+                                    @item.DersAcma.Mufredat.DersHavuzu.DersKodu - @item.DersAcma.Mufredat.DersHavuzu.DersAdi<br />
+                                    @item.Derslik.DerslikAdi - @item.DersAcma.Mufredat.Bolum.BolumAdi <br />
+                                    <!-- DERSLİK TÜRÜNÜ EKLE -->
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="color: black;">&#10005;</div>
+                            }
+                        </td>
+
+                    }
+                </tr>
+            }
+        </tbody>
+    }
+</table>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "GoruntuleOgretimElemani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("GoruntuleOgretimElemani", "AnaSayfa", FormMethod.Post))
+{
+    <div class="container">
+        <div class="container">
+            <div class="col-md-6">
+                <br />
+                <br />
+
+                <label><b>Öğrenci Adı :</b>@Model.Adi</label><br />
+                <label><b>Öğrenci Soyadı :</b>@Model.Soyadi</label><br />
+                <label><b>Öğrenci Numarası :</b>@Model.OgrenciNo</label><br />
+                <label><b>Öğrenci Durumu :</b>@Model.Durumu</label><br />
+                <label><b>Kayıt Tarihi :</b>@Model.KayitTarihi</label><br />
+                <label><b>Ayrılma Tarihi :</b>@Model.AyrilmaTarihi</label><br />
+                <label><b>TC Kimlik No :</b>@Model.TCKimlikNo</label><br />
+                <label><b>Cinsiyet :</b>@Model.Cinsiyet</label><br />
+                <label><b>Doğum Tarihi :</b>@Model.DogumTarihi</label><br />
+                <br />
+                <br />
+
+
+
+            </div>
+        </div>
+
+    </div>
+}
+<div class="container">
+    <div class="container">
+        <div class="col-md-6">
+            @using (Html.BeginForm("IndexOgretimElemani", "AnaSayfa", FormMethod.Post))
+            {
+                <button type="submit" class="btn btn-primary">Kapat</button>
+            }
+
+
+        </div>
+    </div>
+
+</div>
+
+

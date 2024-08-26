@@ -1,0 +1,149 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<Ogrenci>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Belgesi</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        h2, h3 {
+            text-align: center;
+        }
+
+        td.bold {
+            font-weight: bold;
+        }
+
+        .spacer {
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="tableogrbelge">
+        <h2>T.C. YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI</h2>
+        <h3>ÖĞRENCİ BELGESİ</h3>
+        @foreach (var item in Model)
+        {
+            if (Int32.Parse(item.OgrenciNo) == Convert.ToInt32(Session["OgrenciNo"]))
+
+            {
+                <table>
+                    <tr>
+                        <td class="bold">Adı / Soyadı:</td>
+                        <td>@item.Adi @item.Soyadi</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Doğum Tarihi / Uyruğu:</td>
+                        <td>@item.DogumTarihi / TÜRKİYE CUMHURİYETİ</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Kayıt Tarihi:</td>
+                        <td>@item.KayitTarihi</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Eğitim Türü / Öğrenim Süresi:</td>
+                        <td>@item.Bolum.OgretimTuru / 4</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">T.C. Kimlik No:</td>
+                        <td>@item.TCKimlikNo</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Öğrencilik Durumu:</td>
+                        <td>@item.Durumu</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Sınıf:</td>
+                        <td>@(item.AyrilmaTarihi.Year - item.KayitTarihi.Year) . Sınıf</td>
+                    </tr>
+                    <tr>
+                        <td class="bold">Program:</td>
+                        <td>BANDIRMA ONYEDİ EYLÜL ÜNİVERSİTESİ/@item.Bolum.BolumAdi/</td>
+                    </tr>
+                </table>
+
+
+            }
+        }</div>
+
+        <div class="spacer"></div>
+        <button id="convertButton" class="btn btn-info">PDF Rapor Oluşturma</button>
+
+        <p>Yukarıda kimlik bilgileri yer alan Azime Tolumoğlu isimli kişinin Bandırma Onyedi Eylül Üniversitesi tarafından yukarıda belirtilen programın kayıtlı öğrencisi olduğu bildirilmiştir.</p>
+
+        
+    <script>
+        // PDF KISMINA AİTTİR
+
+        document.getElementById('convertButton').addEventListener('click', function () {
+            // Tabloyu içeren elementin ID'si ile tabloyu seç
+            var myTable = document.getElementById('tableogrbelge');
+            var secTable = tableogrbelge.cloneNode(true);
+            //// Belirli bir sütunu (kolonu) silen fonksiyon
+            //function deleteColumn(columnIndex) {
+            //    for (var i = 0; i < secTable.rows.length; i++) {
+            //        secTable.rows[i].deleteCell(columnIndex);
+            //    }
+            //}
+
+            //// Silinecek sütunun indeksini belirt
+            //var columnIndexToDelete = 6; // Örneğin, 1. sütunu sil
+
+            //// Belirtilen sütunu sil
+            //deleteColumn(columnIndexToDelete);
+            // Remove the button from the cloned table
+
+            var inputHtml = document.getElementsByTagName('head')[0].innerHTML + secTable.outerHTML;
+            var dataToSend = { inputData: inputHtml };
+
+            fetch('/OgrenciBelgesi/ConvertToPdf', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0]
+                },
+                body: JSON.stringify(dataToSend)
+            })
+                .then(response => response.blob())
+                .then(blob => {
+                    // Code to download the PDF file
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'converted.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        // PDF KISMINA AİTTİR
+
+    </script>
+</body>
+
+        
+</html>

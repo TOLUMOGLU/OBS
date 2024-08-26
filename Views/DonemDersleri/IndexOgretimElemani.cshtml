@@ -1,0 +1,139 @@
+﻿@model List<OgrenciBilgiSistemi.Models.Mufredat>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Diğer head etiketleri burada yer alabilir -->
+
+    <title>Öğrenci Bilgi Sistemi</title>
+
+    <!-- DataTables CSS ve JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    <!-- Diğer script etiketleri burada yer alabilir -->
+</head>
+<body>
+    <h1>Öğretim Elemanı Verilen Dersler</h1>
+    <button id="copyButton" class="btn btn-primary">Kopyala</button>
+    <button id="exportExcelButton" class="btn btn-success">Excele Aktar</button>
+    <button id="exportPdfButton" class="btn btn-info">PDF'e Aktar</button>
+
+    <br />
+
+    <table class="table table-bordered" id="myTable">
+        <thead>
+            <tr>
+                @if (User.IsInRole("Öğretim Elemanı"))
+                {
+                    <th>#</th>
+                    <th>Ders Kodu</th>
+                    <th>Ders Adı</th>
+                    <th>Bölüm Adı</th>
+                    <th>Ders Türü</th>
+                    <th>Ders Dönemi</th>
+                    <th>Akademik Yıl</th>
+                    <th>Teorik(T)</th>
+                    <th>Uygulama(U)</th>
+                    <th>Kredi(K)</th>
+                    <th>ECTS</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (User.IsInRole("Öğretim Elemanı"))
+                //{
+                //    if (Int32.Parse(item.Bolum.OgretimElemani.KurumSicilNo) == Convert.ToInt32(Session["KurumSicilNo"]))
+                {
+                    <tr>
+                        <td>@item.DersHavuzu.DersID</td>
+                        <td>@item.DersHavuzu.DersKodu</td>
+                        <td>@item.DersHavuzu.DersAdi</td>
+                        <td>@item.Bolum.BolumAdi</td>
+                        <td>@item.DersHavuzu.DersTuru</td>
+                        <td>@item.AkademikDonem</td>
+                        <td>@item.AkademikYil</td>
+                        <td>@item.DersHavuzu.Teorik</td>
+                        <td>@item.DersHavuzu.Uygulama</td>
+                        <td>@item.DersHavuzu.Kredi</td>
+                        <td>@item.DersHavuzu.ECTS</td>
+                    </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+
+    <!-- Diğer script etiketleri burada yer alabilir -->
+
+    <script>
+        $(document).ready(function () {
+            // DataTables'ı başlatın ve sayfalama kontrolünü kullanıcıya seçtirin
+            var dataTable = $('#myTable').DataTable({
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tümü"]],
+                "pageLength": 10, // Varsayılan sayfa başına kayıt sayısı
+            });
+
+            // Sayfalama kontrolü değiştikçe DataTables'ı güncelleyin
+            $('#pageLengthSelect').on('change', function () {
+                var selectedValue = $(this).val();
+                dataTable.page.len(selectedValue).draw();
+            });
+
+            // Kopyala işlemi için Clipboard.js kullanımı
+            var clipboard = new ClipboardJS('.btn-primary', {
+                text: function () {
+                    var table = document.querySelector('.table');
+                    var rows = Array.from(table.querySelectorAll('tr')).map(function (row) {
+                        return Array.from(row.querySelectorAll('th, td')).map(function (cell) {
+                            return cell.textContent.trim();
+                        }).join('\t');
+                    }).join('\n');
+                    return rows;
+                }
+            });
+
+            clipboard.on('success', function (e) {
+                alert('Tablo kopyalandı!');
+                e.clearSelection();
+            });
+
+            clipboard.on('error', function (e) {
+                alert('Kopyalama başarısız!');
+            });
+
+            // Excele aktarma işlemi için SheetJS kullanımı
+            function exportToExcel() {
+                var table = document.querySelector('.table');
+                var wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+                var wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+                function s2ab(s) {
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+                    return buf;
+                }
+
+                saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'tablo.xlsx');
+            }
+
+            // PDF'e aktarma işlemi için jsPDF kullanımı
+            function exportToPDF() {
+                var table = document.querySelector('.table');
+                var pdf = new jsPDF('p', 'pt', 'letter');
+                pdf.autoTable({ html: table });
+                pdf.save('tablo.pdf');
+            }
+        });
+    </script>
+
+</body>
+</html>

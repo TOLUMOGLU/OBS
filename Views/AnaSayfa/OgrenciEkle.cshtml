@@ -1,0 +1,88 @@
+﻿@model OgrenciBilgiSistemi.Models.Ogrenci
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Öğrenci Ekle</h2>
+
+@using (Html.BeginForm("OgrenciEkle", "AnaSayfa", FormMethod.Post))
+{
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="OgrenciID">Öğrenci ID:</label>
+                    @Html.TextBoxFor(model => model.OgrenciID, new { @class = "form-control", @readonly = "readonly" })
+                    <!-- readonly attribute to prevent user input -->
+                </div>
+                <div class="form-group">
+                    <label for="BolumID">Bolum ID:</label>
+                    @Html.TextBoxFor(model => model.BolumID, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="OgrenciNo">Öğrenci No :</label>
+                    @Html.TextBoxFor(model => model.OgrenciNo, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Durumu">Durumu:</label>
+                    @Html.TextBoxFor(model => model.Durumu, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="Adi">Öğrenci Adı:</label>
+                    @Html.TextBoxFor(model => model.Adi, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="Soyadi">Öğrenci Soyadı:</label>
+                    @Html.TextBoxFor(model => model.Soyadi, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label for="TCKimlikNo">TC Kimlik No:</label>
+                    @Html.TextBoxFor(model => model.TCKimlikNo, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    <label for="Cinsiyet">Cinsiyet :</label>
+                    @Html.TextBoxFor(model => model.Cinsiyet, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="DogumTarihi">Doğum Tarihi(YYYY-MM-DD):</label>
+                    @Html.TextBoxFor(model => model.DogumTarihi, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="KayitTarihi">Kayıt Tarihi(YYYY-MM-DD):</label>
+                    @Html.TextBoxFor(model => model.KayitTarihi, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="AyrilmaTarihi">Ayrılma Tarihi(YYYY-MM-DD):</label>
+                    @Html.TextBoxFor(model => model.AyrilmaTarihi, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="KullaniciID">Kullanici ID:</label>
+                    @Html.TextBoxFor(model => model.KullaniciID, new { @class = "form-control" })
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-success">Ekle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container">
+    <div class="col-md-1">
+        @using (Html.BeginForm("IndexOgretimElemani", "AnaSayfa", FormMethod.Post))
+        {
+            <button type="submit" class="btn btn-danger">Kapat</button>
+        }
+    </div>
+</div>

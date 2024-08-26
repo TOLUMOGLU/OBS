@@ -1,0 +1,56 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<Mufredat>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sınav Notları</h2>
+<table class="table table-bordered">
+    <tr>
+
+        @if (User.IsInRole("Öğretim Elemanı"))
+        {
+
+            <th>Ders Kodu</th>
+            <th>Ders Adı</th>
+            <th>Sınav Türü</th>
+            <th>Sınav Etki Oranı</th>
+            <th>Sınav Notu</th>
+        }
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (User.IsInRole("Öğretim Elemanı"))
+            {
+
+                <td>@item.DersHavuzu.DersKodu</td>
+                <td>@item.DersHavuzu.DersAdi</td>
+               // <td>@item.SinavTuru</td>
+               // <td>@item.EtkiOrani</td>
+                <td>değerlendirmey sınava sonradan bağladım gelmiyo</td>
+            }
+
+
+
+
+        </tr>
+
+
+
+        //CRUD İŞLEMLERİNDE KALDIM KULLANICI ADINA BASTIĞINDA BİLGİLER GELMESİ GEREKİYOR
+        //Bu bilgile düzenlenmeli vs vs
+
+
+
+
+    }
+
+
+
+
+
+</table>
+

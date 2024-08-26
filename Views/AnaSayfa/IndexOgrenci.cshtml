@@ -1,0 +1,72 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<Ogrenci>
+@{
+    ViewBag.Title = "IndexOgretimElemani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- jQuery UI stil dosyaları -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<style>
+    .ozluluk-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+        .ozluluk-container h2 {
+            margin-bottom: 10px;
+        }
+
+        .ozluluk-container h3 {
+            margin-top: 20px;
+        }
+
+        /* İçerik alanları için örnek renklendirme */
+        .ozluluk-container p {
+            background-color: #d4edda; /* İçerik arkaplan rengi */
+            color: #155724; /* İçerik metin rengi */
+            padding: 5px;
+            margin: 5px 0;
+        }
+</style>
+
+<br />
+<br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (Int32.Parse(item.OgrenciNo) == Convert.ToInt32(Session["OgrenciNo"]))
+        {
+                <div class="col-md-3">
+                    <div class="ozluluk-container" style="background-color:dodgerblue; border:hidden ">
+                        <h3>Aktif Akademik Dönem Bilgileri</h3>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="ozluluk-container" style="background-color:cadetblue">
+                        <h3>Danışman Bilgileri</h3>
+                        <p></p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="ozluluk-container" style="background-color:dodgerblue">
+                        <h3>Öğrenim Bilgileri</h3>
+                        <p style="background-color: #cce5ff; color: #004085; padding: 5px; margin: 5px 0;">@item.Bolum.BolumAdi</p>
+                        <p style="background-color: #d1ecf1; color: #0c5460; padding: 5px; margin: 5px 0;">@(item.AyrilmaTarihi.Year - item.KayitTarihi.Year) . Sınıf</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="ozluluk-container" style="background-color:steelblue">
+                        <p style="background-color: #d4edda; color: #155724; padding: 5px; margin: 5px 0;"><strong>Kayıt Tarihi:</strong> @item.KayitTarihi</p>
+                        <p style="background-color: #c3e6cb; color: #155724; padding: 5px; margin: 5px 0;"><strong>AGNO:</strong> </p>
+                    </div>
+                </div>
+        }
+    }
+        </div>

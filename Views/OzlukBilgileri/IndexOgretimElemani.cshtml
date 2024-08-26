@@ -1,0 +1,57 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<OgretimElemani>
+@{
+    ViewBag.Title = "IndexOgretimElemani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- jQuery UI stil dosyaları -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<style>
+    .ozluluk-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+        .ozluluk-container h2 {
+            margin-bottom: 10px;
+        }
+
+        .ozluluk-container h3 {
+            margin-top: 20px;
+        }
+</style>
+
+<h2>Öğretim Elemanı Özlülük Bilgileri</h2>
+
+
+@foreach (var item in Model)
+{
+    if (Int32.Parse(item.KurumSicilNo) == Convert.ToInt32(Session["KurumSicilNo"]))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ozluluk-container">
+                    <h3>Kimlik Bilgileri</h3>
+
+                    <p><strong>Ad Soyad:</strong> @item.Adi @item.Soyadi</p>
+                    <p><strong>TC Kimlik No:</strong> @item.TCKimlikNo</p>
+                    <p><strong>Doğum Tarihi:</strong> @item.DogumTarihi.ToShortDateString()</p>
+                    @Html.ActionLink("Düzenle", "DuzenleOzlukOgretimElemani", new { id = item.KurumSicilNo }, new { @class = "btn btn-success" })
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="ozluluk-container">
+                    <h3>Kurumsal Bilgiler</h3>
+                    <p><strong>Bölüm:</strong> @item.Bolum.BolumAdi</p>
+                    <p><strong>Kurum Sicil No:</strong> @item.KurumSicilNo</p>
+                    <p><strong>Unvan:</strong> @item.Unvan</p>
+                </div>
+            </div>
+        </div>
+    }
+}
+

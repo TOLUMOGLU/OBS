@@ -1,0 +1,119 @@
+﻿@using OgrenciBilgiSistemi.Models
+@model List<Sinav>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğretim Elemanı Değerlendirme</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Öğretim Elemanı Değerlendirme</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ders Kodu</th>
+                    <th>Ders Adı</th>
+                    <th>Sınav Türü</th>
+                    <th>Sınav Etki Oranı</th>
+                    <th>İşlem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <!-- Bu kısımı senin verilerinle doldurman gerekiyor -->
+                <tr data-sinavid="1" data-sinavtur="Vize" data-etkioran="30">
+                    <td>@item.DersAcma.Mufredat.DersHavuzu.DersID</td>
+                    <td>@item.DersAcma.Mufredat.DersHavuzu.DersKodu</td>
+                    <td>@item.DersAcma.Mufredat.DersHavuzu.DersAdi</td>
+                    <td>@item.SinavTuru</td>
+                    <td>@item.EtkiOrani</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="showStudents(1)">Öğrencileri Görüntüle</button>
+                    </td>
+                </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Öğrenci Detayları Modal -->
+    <div class="modal fade" id="studentsModal" tabindex="-1" role="dialog" aria-labelledby="studentsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="studentsModalLabel">Öğrenci Listesi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Öğrenci ID</th>
+                                <th>Öğrenci Adı</th>
+                                <th>Not Girişi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Burası JavaScript ile doldurulacak -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary">Notları Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showStudents(sinavID) {
+        
+            // Burada senin gerçek verilerini alman gerekiyor (örnekte elle ekledim)
+            var students = [
+                { id: 1, ad: "Öğrenci 1", not: 70 },
+                { id: 2, ad: "Öğrenci 2", not: 85 },
+                // Daha fazla öğrenci...
+            ];
+
+            // Modal içindeki öğrenci tablosunu temizle
+            $("#studentsTableBody").empty();
+
+            // Her bir öğrenciyi tabloya ekle
+            students.forEach(function (student) {
+                var row = `<tr>
+                                       <td>${student.id}</td>
+                                       <td>${student.ad}</td>
+                                       <td><input type="text" class="form-control" id="not-${student.id}" placeholder="Not Giriniz" value="${student.not}"></td>
+                                   </tr>`;
+                $("#studentsTableBody").append(row);
+            });
+
+            // Modal'ı göster
+            $("#studentsModal").modal("show");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1cb9820ae3674768b413ff539fa0550a" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="obsModel1.Bolum" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="obsModel1.Danismanlik" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="obsModel1.Degerlendirme" Width="1.5" PointX="12.75" PointY="10.875" />
+        <EntityTypeShape EntityType="obsModel1.DersAcma" Width="1.5" PointX="8.25" PointY="7" />
+        <EntityTypeShape EntityType="obsModel1.DersAlma" Width="1.5" PointX="10.5" PointY="9.125" />
+        <EntityTypeShape EntityType="obsModel1.DersHavuzu" Width="1.5" PointX="3.75" PointY="14.75" />
+        <EntityTypeShape EntityType="obsModel1.Derslik" Width="1.5" PointX="8.25" PointY="3.125" />
+        <EntityTypeShape EntityType="obsModel1.DersProgrami" Width="1.5" PointX="13.5" PointY="7.375" />
+        <EntityTypeShape EntityType="obsModel1.Kullanici" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="obsModel1.Mufredat" Width="1.5" PointX="6" PointY="9.875" />
+        <EntityTypeShape EntityType="obsModel1.Ogrenci" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="obsModel1.OgretimElemani" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="obsModel1.Sinav" Width="1.5" PointX="10.5" PointY="4.5" />
+        <EntityTypeShape EntityType="obsModel1.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="obsModel1.FK_Mufredat_Bolum" />
+        <AssociationConnector Association="obsModel1.FK_Ogrenci_Bolum" />
+        <AssociationConnector Association="obsModel1.FK_OgretimElemani_Bolum" />
+        <AssociationConnector Association="obsModel1.FK_Danismanlik_Ogrenci" />
+        <AssociationConnector Association="obsModel1.FK_Danismanlik_OgretimElemani" />
+        <AssociationConnector Association="obsModel1.FK_Degerlendirme_Ogrenci" />
+        <AssociationConnector Association="obsModel1.FK_Degerlendirme_Sinav" />
+        <AssociationConnector Association="obsModel1.FK_DersAcma_Mufredat" />
+        <AssociationConnector Association="obsModel1.FK_DersAcma_OgretimElemani" />
+        <AssociationConnector Association="obsModel1.FK_DersAlma_DersAcma" />
+        <AssociationConnector Association="obsModel1.FK_DersProgrami_DersAcma" />
+        <AssociationConnector Association="obsModel1.FK_Sinav_DersAcma" />
+        <AssociationConnector Association="obsModel1.FK_DersAlma_Ogrenci" />
+        <AssociationConnector Association="obsModel1.FK_Mufredat_DersHavuzu" />
+        <AssociationConnector Association="obsModel1.FK_DersProgrami_Derslik" />
+        <AssociationConnector Association="obsModel1.FK_Sinav_Derslik" />
+        <AssociationConnector Association="obsModel1.FK_Ogrenci_Kullanici" />
+        <AssociationConnector Association="obsModel1.FK_OgretimElemani_Kullanici" />
+        <AssociationConnector Association="obsModel1.FK_Sinav_OgretimElemani" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
